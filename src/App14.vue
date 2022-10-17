@@ -16,25 +16,26 @@
           <div slot="header">
             <span>Content</span>
           </div>
-          <drop-list :items="items" class="list" @insert="onInsert" @reorder="$event.apply(items)">
+          <!-- <drop-list :items="items" class="list" @insert="onInsert" @reorder="onReorder">
             <template v-slot:item="{item}">
               <drag class="item" :key="item">
                 {{item}}
-                <template v-slot:drag-image="{item}">
-                  <div class="drag-image">DRAG2</div>
+                <template v-slot:drag-image>
+                  <div class="drag-image">ItemInner</div>
                 </template>
               </drag>
             </template>
-            <template v-slot:drag-image="{item}">
-              <div class="drag-image">DRAG1</div>
+            <template v-slot:drag-image>
+              <div class="drag-image">ItemOuter</div>
             </template>
             <template v-slot:feedback="{data}">
               <div class="feedback" :key="data" />
             </template>
-            <template v-slot:reordering-feedback="{item}">
+            <template v-slot:reordering-feedback="{}">
               <div class="reordering-feedback" key="feedback" />
             </template>
-          </drop-list>
+          </drop-list> -->
+          <DragItem />
         </el-card>
       </el-col>
     </el-row>
@@ -42,15 +43,16 @@
 </template>
 <script>
 import { Drag, DropList } from "vue-easy-dnd";
+import DragItem from '@/components/DragItem.vue';
 export default {
   name: "App",
   components: {
     Drag,
     DropList,
+    DragItem
   },
   data() {
       return {
-          key : 0,
           items : ['a', 'b', 'c']
       }
   },
@@ -67,8 +69,6 @@ export default {
       this.items.splice(index, 1);
     }
   },
-  mounted() {
-  }
 }
 </script>
 
