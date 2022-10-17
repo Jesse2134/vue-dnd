@@ -12,10 +12,12 @@
     "@segi/template": "file:lib",
     "core-js": "^3.6.5",
     "custom-event-polyfill": "^1.0.7",
+    "element-ui": "^2.15.10",
     "regenerator-runtime": "^0.13.7",
     "roboto-fontface": "*",
     "vue": "^2.6.10",
     "vue-class-component": "^7.2.3",
+    "vue-easy-dnd": "^1.22.0",
     "vue-property-decorator": "^8.4.1",
     "vuetify": "^2.1.13"
   },
