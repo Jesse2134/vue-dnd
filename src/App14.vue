@@ -6,13 +6,13 @@
           <div slot="header">
             <span>component</span>
           </div>
-          <div class="list">
-            <drag v-for="n in [1,2,3,4,5]" mode="cut" :data="n" class="item" :key="n">{{n}}</drag>
+          <div class="list-left">
+            <drag v-for="(n, index) in items1" mode="copy" :data="n" class="item" :key="index">{{n.name}}</drag>
           </div>
         </el-card>
       </el-col>
       <el-col :span="16" :offset="0">
-        <el-card shadow="always" :body-style="{ padding: '20px' }">
+        <el-card shadow="always">
           <div slot="header">
             <span>Content</span>
           </div>
@@ -35,7 +35,7 @@
               <div class="reordering-feedback" key="feedback" />
             </template>
           </drop-list> -->
-          <DragItem />
+          <DragItem :items="items" :column="true"  />
         </el-card>
       </el-col>
     </el-row>
@@ -53,21 +53,56 @@ export default {
   },
   data() {
       return {
-          items : ['a', 'b', 'c']
+        items1 : [{
+            name: 'row',
+            type: 'row',
+            span: 12,
+            id: 1,
+          },{
+            name: '第二',
+            span: 24,
+            type: 'col',
+            id: 2,
+          },
+          {
+            name: '第三',
+            span: 24,
+            type: 'col',
+            id: 3,
+          }],
+          items : [
+          //   {
+          //   name: '第一',
+          //   id: 1,
+          //   children: []
+          // },{
+          //   name: '第二',
+          //   id: 2,
+          // },
+          // {
+          //   name: '第三',
+          //   id: 3,
+          //   children: []
+          // }
+          ]
       }
   },
   methods: {
-    onInsert(event) {
-      console.log('event', event);
-      this.items.splice(event.index, 0, event.data + new Date()); // 插入
-    },
-    onReorder(event) {
-      event.apply(this.items);
-    },
-    remove(item) {
-      let index = this.items.indexOf(item);
-      this.items.splice(index, 1);
-    }
+    // onInsert(event) {
+    //   debugger
+    //   console.log('event', event);
+    //   this.items.splice(event.index, 0, {
+    //     name: '第' + new Date().getTime(),
+    //     id: this.items.length + 1
+    //   }); // 插入
+    // },
+    // onReorder(event) {
+    //   event.apply(this.items);
+    // },
+    // remove(item) {
+    //   let index = this.items.indexOf(item);
+    //   this.items.splice(index, 1);
+    // }
   },
 }
 </script>
@@ -76,9 +111,9 @@ export default {
 .app-container {
     padding: 10px;
     width: 100%;
-    .list {
+    .list-left {
       border: 1px solid black;
-      margin: 100px auto;
+      // margin: 100px auto;
       // width: 200px;
       .item {
         padding: 20px;
