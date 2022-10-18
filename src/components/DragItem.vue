@@ -1,19 +1,19 @@
 <template>
-  <drop-list tag="el-row" :items="items" class="list" :column="true" @insert="onInsert" @reorder="onReorder">
+  <drop-list :tag="tag" :items="items" class="list" :column="true" @insert="onInsert" @reorder="onReorder">
     <template v-slot:item="{item}">
-      <drag tag="el-col" :data="item" :span="item.span" class="item" :key="key(item)">
+      <drag :tag="tag" :data="item" :span="item.span" class="item" :key="key(item)" @cut="remove(item)">
         <span class="col-item" v-if="item.children === undefined" :key="key(item)">{{item.name}}</span>
         <el-col v-else :offset="0">
-          <drag-item class="child-list" :items="item.children" :column="true"></drag-item>
+          <drag-item :tag="tag" class="child-list" :items="item.children" :column="false"></drag-item>
         </el-col>
         <template v-slot:drag-image>
           <div class="drag-image">DRAG</div>
         </template>
       </drag>
     </template>
-    <!-- <template v-slot:drag-image>
+    <template v-slot:drag-image>
       <div class="drag-image">DRAG</div>
-    </template> -->
+    </template>
     <template v-slot:feedback="{data}">
       <div class="feedback" :key="key(data)" />
     </template>
@@ -32,6 +32,10 @@ export default {
     DropList
   },
   props: {
+    tag: {
+      type: String,
+      default: 'el-col'
+    },
     items: {
       type: Array,
       default: () => []
@@ -107,12 +111,12 @@ export default {
     justify-content: center;
   }
 
-  // .reordering-feedback,
-  // .feedback {
-  //   flex: 0 0 0;
-  //   outline: 1px solid orangered;
-  //   align-self: stretch;
-  // }
+  .reordering-feedback,
+  .feedback {
+    flex: 0 0 0;
+    outline: 1px solid orangered;
+    align-self: stretch;
+  }
 
   .drag-source {
     outline: 2px dashed black;

@@ -35,7 +35,9 @@
               <div class="reordering-feedback" key="feedback" />
             </template>
           </drop-list> -->
-          <DragItem :items="items" :column="true"  />
+          <el-row>
+            <DragItem :items="items" :column="true" />
+          </el-row>
         </el-card>
       </el-col>
     </el-row>
@@ -60,13 +62,13 @@ export default {
             id: 1,
           },{
             name: '第二',
-            span: 24,
+            span: 12,
             type: 'col',
             id: 2,
           },
           {
             name: '第三',
-            span: 24,
+            span: 12,
             type: 'col',
             id: 3,
           }],
